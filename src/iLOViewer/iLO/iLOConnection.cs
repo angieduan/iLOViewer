@@ -20,12 +20,11 @@ namespace iLOViewer
         public string UserPassword { get; set; }
 
         public bool IsRunning { get; private set; }
-
         public bool IsConnected { get; private set; }
+        public DateTime NextAttempt { get; private set; }
+        public string Status { get; private set; }
 
         public JObject SystemInfo { get; private set; }
-
-        public string Status { get; private set; }
 
         private iLOHttpClient iLOHttpClient = new iLOHttpClient();
         private string sessionKey = string.Empty;
@@ -54,9 +53,6 @@ namespace iLOViewer
                     JObject json = await this.iLOHttpClient.DoJsonRequestAsync("POST", "json/login_session", jBody);
                     this.sessionKey = json["session_key"].ToString();
 
-                    this.IsConnected = true;
-                    this.Status = "";
-
                     this.IsRunning = false;
 
                     this.UpdateSystemInfo();
@@ -64,8 +60,7 @@ namespace iLOViewer
             }
             catch
             {
-                this.IsConnected = false;
-                this.Status = "Failed to connect this iLO.";
+                this.SetFailStatus();
 
                 this.IsRunning = false;
             }
@@ -104,16 +99,25 @@ namespace iLOViewer
                         {"LastRefresh", DateTime.Now.ToString("HH:mm:ss")}
                     };
 
+                    this.IsConnected = true;
+                    this.Status = "";
+
                     this.IsRunning = false;
                 }
             }
             catch
             {
-                this.IsConnected = false;
-                this.Status = "Failed to connect this iLO.";
+                this.SetFailStatus();
 
                 this.IsRunning = false;
             }
+        }
+
+        private void SetFailStatus()
+        {
+            this.IsConnected = false;
+            this.Status = "Failed to connect this iLO.";
+            this.NextAttempt = DateTime.Now.AddMinutes(2);
         }
 
         public void PowerMomentaryPress()

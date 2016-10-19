@@ -36,6 +36,7 @@
             this.toolStripStatusLabel_ServerStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_ServerPower = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_LastRefresh = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel_ConnStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox_Fan = new System.Windows.Forms.GroupBox();
             this.listView_Fan = new System.Windows.Forms.ListView();
             this.columnHeader_Fan_Fan = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -59,7 +60,7 @@
             this.contextMenuStrip_NotifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem_NotifyIcon_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon_Main = new System.Windows.Forms.NotifyIcon(this.components);
-            this.toolStripStatusLabel_ConnStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer_UpdateServerInfo = new System.Windows.Forms.Timer(this.components);
             this.statusStrip_Main.SuspendLayout();
             this.groupBox_Fan.SuspendLayout();
             this.groupBox_Temp.SuspendLayout();
@@ -70,7 +71,7 @@
             // 
             // timer_ShowServerInfo
             // 
-            this.timer_ShowServerInfo.Interval = 5000;
+            this.timer_ShowServerInfo.Interval = 3000;
             this.timer_ShowServerInfo.Tick += new System.EventHandler(this.timer_ShowServerInfo_Tick);
             // 
             // statusStrip_Main
@@ -114,6 +115,14 @@
             this.toolStripStatusLabel_LastRefresh.Name = "toolStripStatusLabel_LastRefresh";
             this.toolStripStatusLabel_LastRefresh.Size = new System.Drawing.Size(84, 17);
             this.toolStripStatusLabel_LastRefresh.Text = "LastRefresh";
+            // 
+            // toolStripStatusLabel_ConnStatus
+            // 
+            this.toolStripStatusLabel_ConnStatus.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripStatusLabel_ConnStatus.ForeColor = System.Drawing.Color.Red;
+            this.toolStripStatusLabel_ConnStatus.Name = "toolStripStatusLabel_ConnStatus";
+            this.toolStripStatusLabel_ConnStatus.Size = new System.Drawing.Size(77, 17);
+            this.toolStripStatusLabel_ConnStatus.Text = "ConnStatus";
             // 
             // groupBox_Fan
             // 
@@ -307,13 +316,10 @@
             this.notifyIcon_Main.Visible = true;
             this.notifyIcon_Main.DoubleClick += new System.EventHandler(this.notifyIcon_Main_DoubleClick);
             // 
-            // toolStripStatusLabel_ConnStatus
+            // timer_UpdateServerInfo
             // 
-            this.toolStripStatusLabel_ConnStatus.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripStatusLabel_ConnStatus.ForeColor = System.Drawing.Color.Red;
-            this.toolStripStatusLabel_ConnStatus.Name = "toolStripStatusLabel_ConnStatus";
-            this.toolStripStatusLabel_ConnStatus.Size = new System.Drawing.Size(77, 17);
-            this.toolStripStatusLabel_ConnStatus.Text = "ConnStatus";
+            this.timer_UpdateServerInfo.Interval = 10000;
+            this.timer_UpdateServerInfo.Tick += new System.EventHandler(this.timer_UpdateServerInfo_Tick);
             // 
             // Form_Main
             // 
@@ -379,6 +385,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_NotifyIcon_Exit;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_ServerStatus;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_ConnStatus;
+        private System.Windows.Forms.Timer timer_UpdateServerInfo;
     }
 }
 

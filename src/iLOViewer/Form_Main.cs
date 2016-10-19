@@ -60,6 +60,8 @@ namespace iLOViewer
                 }
             }
 
+            this.timer_UpdateServerInfo_Tick(null, null);
+            this.timer_UpdateServerInfo.Enabled = true;
             this.timer_ShowServerInfo_Tick(null, null);
             this.timer_ShowServerInfo.Enabled = true;
 
@@ -171,16 +173,29 @@ namespace iLOViewer
             this.toolStripStatusLabel_ConnStatus.Text = iLOConn.Status;
         }
 
-        private void timer_ShowServerInfo_Tick(object sender, EventArgs e)
+        private void timer_UpdateServerInfo_Tick(object sender, EventArgs e)
         {
             foreach (var iLOConn in this.iLOConnList)
             {
-                if (iLOConn.IsConnected && !iLOConn.IsRunning)
+                if (iLOConn.IsConnected)
                 {
-                    iLOConn.UpdateSystemInfo();
+                    if (!iLOConn.IsRunning)
+                    {
+                        iLOConn.UpdateSystemInfo();
+                    }
+                }
+                else if (DateTime.Now >= iLOConn.NextAttempt)
+                {
+                    if (!iLOConn.IsRunning)
+                    {
+                        iLOConn.Login();
+                    }
                 }
             }
+        }
 
+        private void timer_ShowServerInfo_Tick(object sender, EventArgs e)
+        {
             // Update UI
             this.listBox_iLOList_SelectedIndexChanged(null, null);
 
