@@ -28,6 +28,11 @@ namespace iLOViewer
 
         private List<iLOConnection> iLOConnList = new List<iLOConnection>();
 
+        private bool fanListIsFocused = false;
+        private int fanListSelectedIndex = 0;
+        private bool tempListIsFocused = false;
+        private int tempListSelectedIndex = 0;
+
         private void Form_Main_Load(object sender, EventArgs e)
         {
             this.LoadAppConfig();
@@ -160,6 +165,15 @@ namespace iLOViewer
                 this.ShowPowerState(iLOConn.SystemInfo["Overview"].ToObject<JObject>());
                 this.toolStripStatusLabel_ServerStatus.Text = ((string)iLOConn.SystemInfo["Overview"]["system_health"]).Replace("OP_STATUS_", "");
                 this.toolStripStatusLabel_LastRefresh.Text = (string)iLOConn.SystemInfo["LastRefresh"];
+
+                if (this.fanListIsFocused && iLOConn.SystemInfo["Fan"]["fans"].Count() > this.fanListSelectedIndex)
+                {
+                    this.listView_Fan.Items[this.fanListSelectedIndex].Selected = true;
+                }
+                else if (this.tempListIsFocused && iLOConn.SystemInfo["Temp"]["temperature"].Count() > this.tempListSelectedIndex)
+                {
+                    this.listView_Temp.Items[this.tempListSelectedIndex].Selected = true;
+                }
             }
             else
             {
@@ -287,6 +301,44 @@ namespace iLOViewer
             else if (this.WindowState == FormWindowState.Minimized)
             {
                 this.WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void listView_Fan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listView_Fan.Items.Count > 0)
+            {
+                if (this.listView_Fan.SelectedItems.Count > 0)
+                {
+                    this.fanListIsFocused = true;
+                    this.fanListSelectedIndex = this.listView_Fan.SelectedItems[0].Index;
+                }
+                else
+                {
+                    this.fanListIsFocused = false;
+                    this.fanListSelectedIndex = -1;
+                }
+
+                this.tempListIsFocused = false;
+            }
+        }
+
+        private void listView_Temp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listView_Temp.Items.Count > 0)
+            {
+                if (this.listView_Temp.SelectedItems.Count > 0)
+                {
+                    this.tempListIsFocused = true;
+                    this.tempListSelectedIndex = this.listView_Temp.SelectedItems[0].Index;
+                }
+                else
+                {
+                    this.tempListIsFocused = false;
+                    this.tempListSelectedIndex = -1;
+                }
+
+                this.fanListIsFocused = false;
             }
         }
     }

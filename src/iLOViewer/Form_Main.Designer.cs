@@ -150,6 +150,7 @@
             this.listView_Fan.TabIndex = 2;
             this.listView_Fan.UseCompatibleStateImageBehavior = false;
             this.listView_Fan.View = System.Windows.Forms.View.Details;
+            this.listView_Fan.SelectedIndexChanged += new System.EventHandler(this.listView_Fan_SelectedIndexChanged);
             // 
             // columnHeader_Fan_Fan
             // 
@@ -194,6 +195,7 @@
             this.listView_Temp.TabIndex = 1;
             this.listView_Temp.UseCompatibleStateImageBehavior = false;
             this.listView_Temp.View = System.Windows.Forms.View.Details;
+            this.listView_Temp.SelectedIndexChanged += new System.EventHandler(this.listView_Temp_SelectedIndexChanged);
             // 
             // columnHeader_Temp_Sensor
             // 
