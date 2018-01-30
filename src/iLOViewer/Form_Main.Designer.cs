@@ -57,6 +57,10 @@
             this.toolStripMenuItem_Action_RemoteConsole_DotNet = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox_iLOList = new System.Windows.Forms.GroupBox();
             this.listBox_iLOList = new System.Windows.Forms.ListBox();
+            this.contextMenuStrip_listBox_iLOList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_listBox_iLOList_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_listBox_iLOList_Edit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_listBox_iLOList_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip_NotifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem_NotifyIcon_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon_Main = new System.Windows.Forms.NotifyIcon(this.components);
@@ -66,6 +70,7 @@
             this.groupBox_Temp.SuspendLayout();
             this.menuStrip_Main.SuspendLayout();
             this.groupBox_iLOList.SuspendLayout();
+            this.contextMenuStrip_listBox_iLOList.SuspendLayout();
             this.contextMenuStrip_NotifyIcon.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,36 +98,36 @@
             // 
             this.toolStripStatusLabel_ServerIP.Name = "toolStripStatusLabel_ServerIP";
             this.toolStripStatusLabel_ServerIP.Size = new System.Drawing.Size(63, 17);
-            this.toolStripStatusLabel_ServerIP.Text = "ServerIP";
+            this.toolStripStatusLabel_ServerIP.Text = "<Server>";
             // 
             // toolStripStatusLabel_ServerStatus
             // 
             this.toolStripStatusLabel_ServerStatus.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel_ServerStatus.Name = "toolStripStatusLabel_ServerStatus";
-            this.toolStripStatusLabel_ServerStatus.Size = new System.Drawing.Size(91, 17);
-            this.toolStripStatusLabel_ServerStatus.Text = "ServerStatus";
+            this.toolStripStatusLabel_ServerStatus.Size = new System.Drawing.Size(112, 17);
+            this.toolStripStatusLabel_ServerStatus.Text = "<Server Status>";
             // 
             // toolStripStatusLabel_ServerPower
             // 
             this.toolStripStatusLabel_ServerPower.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel_ServerPower.ForeColor = System.Drawing.Color.Red;
             this.toolStripStatusLabel_ServerPower.Name = "toolStripStatusLabel_ServerPower";
-            this.toolStripStatusLabel_ServerPower.Size = new System.Drawing.Size(84, 17);
-            this.toolStripStatusLabel_ServerPower.Text = "ServerPower";
+            this.toolStripStatusLabel_ServerPower.Size = new System.Drawing.Size(105, 17);
+            this.toolStripStatusLabel_ServerPower.Text = "<Server Power>";
             // 
             // toolStripStatusLabel_LastRefresh
             // 
             this.toolStripStatusLabel_LastRefresh.Name = "toolStripStatusLabel_LastRefresh";
-            this.toolStripStatusLabel_LastRefresh.Size = new System.Drawing.Size(84, 17);
-            this.toolStripStatusLabel_LastRefresh.Text = "LastRefresh";
+            this.toolStripStatusLabel_LastRefresh.Size = new System.Drawing.Size(105, 17);
+            this.toolStripStatusLabel_LastRefresh.Text = "<Last Refresh>";
             // 
             // toolStripStatusLabel_ConnStatus
             // 
             this.toolStripStatusLabel_ConnStatus.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel_ConnStatus.ForeColor = System.Drawing.Color.Red;
             this.toolStripStatusLabel_ConnStatus.Name = "toolStripStatusLabel_ConnStatus";
-            this.toolStripStatusLabel_ConnStatus.Size = new System.Drawing.Size(77, 17);
-            this.toolStripStatusLabel_ConnStatus.Text = "ConnStatus";
+            this.toolStripStatusLabel_ConnStatus.Size = new System.Drawing.Size(63, 17);
+            this.toolStripStatusLabel_ConnStatus.Text = "<Status>";
             // 
             // groupBox_Fan
             // 
@@ -239,8 +244,10 @@
             this.toolStripMenuItem_Action_Power,
             this.toolStripMenuItem_Action_RemoteConsole});
             this.toolStripMenuItem_Action.Name = "toolStripMenuItem_Action";
+            this.toolStripMenuItem_Action.ShortcutKeyDisplayString = "";
+            this.toolStripMenuItem_Action.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
             this.toolStripMenuItem_Action.Size = new System.Drawing.Size(61, 20);
-            this.toolStripMenuItem_Action.Text = "Action";
+            this.toolStripMenuItem_Action.Text = "&Action";
             this.toolStripMenuItem_Action.DropDownOpened += new System.EventHandler(this.toolStripMenuItem_Action_DropDownOpened);
             // 
             // toolStripMenuItem_Action_Power
@@ -248,14 +255,16 @@
             this.toolStripMenuItem_Action_Power.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_Action_Power_MomentaryPress});
             this.toolStripMenuItem_Action_Power.Name = "toolStripMenuItem_Action_Power";
-            this.toolStripMenuItem_Action_Power.Size = new System.Drawing.Size(172, 22);
-            this.toolStripMenuItem_Action_Power.Text = "Power";
+            this.toolStripMenuItem_Action_Power.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.P)));
+            this.toolStripMenuItem_Action_Power.Size = new System.Drawing.Size(214, 22);
+            this.toolStripMenuItem_Action_Power.Text = "&Power";
             // 
             // toolStripMenuItem_Action_Power_MomentaryPress
             // 
             this.toolStripMenuItem_Action_Power_MomentaryPress.Name = "toolStripMenuItem_Action_Power_MomentaryPress";
-            this.toolStripMenuItem_Action_Power_MomentaryPress.Size = new System.Drawing.Size(179, 22);
-            this.toolStripMenuItem_Action_Power_MomentaryPress.Text = "Momentary Press";
+            this.toolStripMenuItem_Action_Power_MomentaryPress.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
+            this.toolStripMenuItem_Action_Power_MomentaryPress.Size = new System.Drawing.Size(221, 22);
+            this.toolStripMenuItem_Action_Power_MomentaryPress.Text = "&Momentary Press";
             this.toolStripMenuItem_Action_Power_MomentaryPress.Click += new System.EventHandler(this.toolStripMenuItem_Action_Power_MomentaryPress_Click);
             // 
             // toolStripMenuItem_Action_RemoteConsole
@@ -263,14 +272,16 @@
             this.toolStripMenuItem_Action_RemoteConsole.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_Action_RemoteConsole_DotNet});
             this.toolStripMenuItem_Action_RemoteConsole.Name = "toolStripMenuItem_Action_RemoteConsole";
-            this.toolStripMenuItem_Action_RemoteConsole.Size = new System.Drawing.Size(172, 22);
-            this.toolStripMenuItem_Action_RemoteConsole.Text = "Remote Console";
+            this.toolStripMenuItem_Action_RemoteConsole.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
+            this.toolStripMenuItem_Action_RemoteConsole.Size = new System.Drawing.Size(214, 22);
+            this.toolStripMenuItem_Action_RemoteConsole.Text = "&Remote Console";
             // 
             // toolStripMenuItem_Action_RemoteConsole_DotNet
             // 
             this.toolStripMenuItem_Action_RemoteConsole_DotNet.Name = "toolStripMenuItem_Action_RemoteConsole_DotNet";
-            this.toolStripMenuItem_Action_RemoteConsole_DotNet.Size = new System.Drawing.Size(102, 22);
-            this.toolStripMenuItem_Action_RemoteConsole_DotNet.Text = ".Net";
+            this.toolStripMenuItem_Action_RemoteConsole_DotNet.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.N)));
+            this.toolStripMenuItem_Action_RemoteConsole_DotNet.Size = new System.Drawing.Size(144, 22);
+            this.toolStripMenuItem_Action_RemoteConsole_DotNet.Text = ".&Net";
             this.toolStripMenuItem_Action_RemoteConsole_DotNet.Click += new System.EventHandler(this.toolStripMenuItem_Action_RemoteConsole_DotNet_Click);
             // 
             // groupBox_iLOList
@@ -286,6 +297,7 @@
             // listBox_iLOList
             // 
             this.listBox_iLOList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listBox_iLOList.ContextMenuStrip = this.contextMenuStrip_listBox_iLOList;
             this.listBox_iLOList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox_iLOList.FormattingEnabled = true;
             this.listBox_iLOList.HorizontalScrollbar = true;
@@ -295,6 +307,37 @@
             this.listBox_iLOList.Size = new System.Drawing.Size(144, 377);
             this.listBox_iLOList.TabIndex = 0;
             this.listBox_iLOList.SelectedIndexChanged += new System.EventHandler(this.listBox_iLOList_SelectedIndexChanged);
+            // 
+            // contextMenuStrip_listBox_iLOList
+            // 
+            this.contextMenuStrip_listBox_iLOList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_listBox_iLOList_Add,
+            this.toolStripMenuItem_listBox_iLOList_Edit,
+            this.toolStripMenuItem_listBox_iLOList_Delete});
+            this.contextMenuStrip_listBox_iLOList.Name = "contextMenuStrip_listBox_iLOList";
+            this.contextMenuStrip_listBox_iLOList.Size = new System.Drawing.Size(114, 70);
+            this.contextMenuStrip_listBox_iLOList.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_listBox_iLOList_Opening);
+            // 
+            // toolStripMenuItem_listBox_iLOList_Add
+            // 
+            this.toolStripMenuItem_listBox_iLOList_Add.Name = "toolStripMenuItem_listBox_iLOList_Add";
+            this.toolStripMenuItem_listBox_iLOList_Add.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_listBox_iLOList_Add.Text = "Add";
+            this.toolStripMenuItem_listBox_iLOList_Add.Click += new System.EventHandler(this.toolStripMenuItem_listBox_iLOList_Add_Click);
+            // 
+            // toolStripMenuItem_listBox_iLOList_Edit
+            // 
+            this.toolStripMenuItem_listBox_iLOList_Edit.Name = "toolStripMenuItem_listBox_iLOList_Edit";
+            this.toolStripMenuItem_listBox_iLOList_Edit.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_listBox_iLOList_Edit.Text = "Edit";
+            this.toolStripMenuItem_listBox_iLOList_Edit.Click += new System.EventHandler(this.toolStripMenuItem_listBox_iLOList_Edit_Click);
+            // 
+            // toolStripMenuItem_listBox_iLOList_Delete
+            // 
+            this.toolStripMenuItem_listBox_iLOList_Delete.Name = "toolStripMenuItem_listBox_iLOList_Delete";
+            this.toolStripMenuItem_listBox_iLOList_Delete.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_listBox_iLOList_Delete.Text = "Delete";
+            this.toolStripMenuItem_listBox_iLOList_Delete.Click += new System.EventHandler(this.toolStripMenuItem_listBox_iLOList_Delete_Click);
             // 
             // contextMenuStrip_NotifyIcon
             // 
@@ -349,6 +392,7 @@
             this.menuStrip_Main.ResumeLayout(false);
             this.menuStrip_Main.PerformLayout();
             this.groupBox_iLOList.ResumeLayout(false);
+            this.contextMenuStrip_listBox_iLOList.ResumeLayout(false);
             this.contextMenuStrip_NotifyIcon.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -388,6 +432,10 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_ServerStatus;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_ConnStatus;
         private System.Windows.Forms.Timer timer_UpdateServerInfo;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_listBox_iLOList;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_listBox_iLOList_Add;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_listBox_iLOList_Edit;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_listBox_iLOList_Delete;
     }
 }
 

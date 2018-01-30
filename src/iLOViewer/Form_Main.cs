@@ -35,6 +35,11 @@ namespace iLOViewer
 
         private void Form_Main_Load(object sender, EventArgs e)
         {
+            this.ReloadUI();
+        }
+
+        private void ReloadUI()
+        {
             this.LoadAppConfig();
 
             // Update IRC.exe path
@@ -45,6 +50,11 @@ namespace iLOViewer
 
                 this.SaveAppConfig();
             }
+
+            this.LogoutAlliLOConnections();
+            this.listBox_iLOList.ClearSelected();
+            this.listBox_iLOList.Items.Clear();
+            this.iLOConnList.Clear();
 
             if (appConfig["Servers"] != null)
             {
@@ -61,7 +71,7 @@ namespace iLOViewer
                     iLOConn.Login();
 
                     this.listBox_iLOList.Items.Add(iLOConn.ToString());
-                    iLOConnList.Add(iLOConn);
+                    this.iLOConnList.Add(iLOConn);
                 }
             }
 
@@ -80,16 +90,7 @@ namespace iLOViewer
         {
             timer_ShowServerInfo.Enabled = false;
 
-            if (this.iLOConnList != null)
-            {
-                foreach (var iLOConn in this.iLOConnList)
-                {
-                    if (iLOConn.IsConnected)
-                    {
-                        iLOConn.Logout();
-                    }
-                }
-            }
+            this.LogoutAlliLOConnections();
 
             e.Cancel = false;
         }
@@ -103,6 +104,20 @@ namespace iLOViewer
         private void SaveAppConfig()
         {
             File.WriteAllText(this.appConfigPath, appConfig.ToString());
+        }
+
+        private void LogoutAlliLOConnections()
+        {
+            if (this.iLOConnList != null)
+            {
+                foreach (var iLOConn in this.iLOConnList)
+                {
+                    if (iLOConn.IsConnected)
+                    {
+                        iLOConn.Logout();
+                    }
+                }
+            }
         }
 
         private string GetIRCPath()
@@ -265,7 +280,7 @@ namespace iLOViewer
         {
             if (this.listBox_iLOList.SelectedIndex >= 0)
             {
-                this.toolStripStatusLabel_ServerIP.Text = this.iLOConnList[this.listBox_iLOList.SelectedIndex].Host;
+                this.toolStripStatusLabel_ServerIP.Text = string.Format("{0}({1})", this.iLOConnList[this.listBox_iLOList.SelectedIndex].Name, this.iLOConnList[this.listBox_iLOList.SelectedIndex].Host);
                 this.UpdateUIData();
             }
         }
@@ -339,6 +354,71 @@ namespace iLOViewer
                 }
 
                 this.fanListIsFocused = false;
+            }
+        }
+
+        private void contextMenuStrip_listBox_iLOList_Opening(object sender, CancelEventArgs e)
+        {
+            if (this.listBox_iLOList.SelectedIndex >= 0)
+            {
+                this.toolStripMenuItem_listBox_iLOList_Add.Enabled = true;
+                this.toolStripMenuItem_listBox_iLOList_Edit.Enabled = true;
+                this.toolStripMenuItem_listBox_iLOList_Delete.Enabled = true;
+            }
+            else
+            {
+                this.toolStripMenuItem_listBox_iLOList_Add.Enabled = true;
+                this.toolStripMenuItem_listBox_iLOList_Edit.Enabled = false;
+                this.toolStripMenuItem_listBox_iLOList_Delete.Enabled = false;
+            }
+        }
+
+        private void toolStripMenuItem_listBox_iLOList_Add_Click(object sender, EventArgs e)
+        {
+            Form_iLO form_iLO = new Form_iLO();
+            form_iLO.ShowDialog();
+
+            JObject jObj = new JObject();
+            jObj["Name"] = form_iLO.iLOConnection.Name;
+            jObj["Https"] = form_iLO.iLOConnection.Https;
+            jObj["Host"] = form_iLO.iLOConnection.Host;
+            jObj["Port"] = form_iLO.iLOConnection.Port;
+            jObj["User"] = form_iLO.iLOConnection.User;
+            jObj["Password"] = form_iLO.iLOConnection.UserPassword;
+
+            (appConfig["Servers"] as JArray).Add(jObj);
+            this.SaveAppConfig();
+            this.ReloadUI();
+        }
+
+        private void toolStripMenuItem_listBox_iLOList_Edit_Click(object sender, EventArgs e)
+        {
+            if (this.listBox_iLOList.SelectedIndex >= 0)
+            {
+                Form_iLO form_iLO = new Form_iLO(this.iLOConnList[this.listBox_iLOList.SelectedIndex]);
+                form_iLO.ShowDialog();
+
+                JObject jObj = new JObject();
+                jObj["Name"] = form_iLO.iLOConnection.Name;
+                jObj["Https"] = form_iLO.iLOConnection.Https;
+                jObj["Host"] = form_iLO.iLOConnection.Host;
+                jObj["Port"] = form_iLO.iLOConnection.Port;
+                jObj["User"] = form_iLO.iLOConnection.User;
+                jObj["Password"] = form_iLO.iLOConnection.UserPassword;
+
+                appConfig["Servers"][this.listBox_iLOList.SelectedIndex] = jObj;
+                this.SaveAppConfig();
+                this.ReloadUI();
+            }
+        }
+
+        private void toolStripMenuItem_listBox_iLOList_Delete_Click(object sender, EventArgs e)
+        {
+            if (this.listBox_iLOList.SelectedIndex >= 0)
+            {
+                this.appConfig["Servers"][this.listBox_iLOList.SelectedIndex].Remove();
+                this.SaveAppConfig();
+                this.ReloadUI();
             }
         }
     }
