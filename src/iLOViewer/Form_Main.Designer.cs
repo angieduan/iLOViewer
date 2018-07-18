@@ -102,7 +102,7 @@
             // 
             // toolStripStatusLabel_ServerStatus
             // 
-            this.toolStripStatusLabel_ServerStatus.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripStatusLabel_ServerStatus.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel_ServerStatus.Name = "toolStripStatusLabel_ServerStatus";
             this.toolStripStatusLabel_ServerStatus.Size = new System.Drawing.Size(112, 17);
             this.toolStripStatusLabel_ServerStatus.Text = "<Server Status>";
@@ -321,21 +321,21 @@
             // toolStripMenuItem_listBox_iLOList_Add
             // 
             this.toolStripMenuItem_listBox_iLOList_Add.Name = "toolStripMenuItem_listBox_iLOList_Add";
-            this.toolStripMenuItem_listBox_iLOList_Add.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_listBox_iLOList_Add.Size = new System.Drawing.Size(113, 22);
             this.toolStripMenuItem_listBox_iLOList_Add.Text = "Add";
             this.toolStripMenuItem_listBox_iLOList_Add.Click += new System.EventHandler(this.toolStripMenuItem_listBox_iLOList_Add_Click);
             // 
             // toolStripMenuItem_listBox_iLOList_Edit
             // 
             this.toolStripMenuItem_listBox_iLOList_Edit.Name = "toolStripMenuItem_listBox_iLOList_Edit";
-            this.toolStripMenuItem_listBox_iLOList_Edit.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_listBox_iLOList_Edit.Size = new System.Drawing.Size(113, 22);
             this.toolStripMenuItem_listBox_iLOList_Edit.Text = "Edit";
             this.toolStripMenuItem_listBox_iLOList_Edit.Click += new System.EventHandler(this.toolStripMenuItem_listBox_iLOList_Edit_Click);
             // 
             // toolStripMenuItem_listBox_iLOList_Delete
             // 
             this.toolStripMenuItem_listBox_iLOList_Delete.Name = "toolStripMenuItem_listBox_iLOList_Delete";
-            this.toolStripMenuItem_listBox_iLOList_Delete.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_listBox_iLOList_Delete.Size = new System.Drawing.Size(113, 22);
             this.toolStripMenuItem_listBox_iLOList_Delete.Text = "Delete";
             this.toolStripMenuItem_listBox_iLOList_Delete.Click += new System.EventHandler(this.toolStripMenuItem_listBox_iLOList_Delete_Click);
             // 

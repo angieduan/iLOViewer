@@ -178,7 +178,16 @@ namespace iLOViewer
                 this.ShowFan(iLOConn.SystemInfo["Fan"].ToObject<JObject>());
                 this.ShowTemp(iLOConn.SystemInfo["Temp"].ToObject<JObject>());
                 this.ShowPowerState(iLOConn.SystemInfo["Overview"].ToObject<JObject>());
-                this.toolStripStatusLabel_ServerStatus.Text = ((string)iLOConn.SystemInfo["Overview"]["system_health"]).Replace("OP_STATUS_", "");
+                string serverStatus = ((string)iLOConn.SystemInfo["Overview"]["system_health"]).Replace("OP_STATUS_", "");
+                if (serverStatus.ToUpper() == "OK")
+                {
+                    this.toolStripStatusLabel_ServerStatus.ForeColor = Color.Green;
+                }
+                else
+                {
+                    this.toolStripStatusLabel_ServerStatus.ForeColor = Color.Red;
+                }
+                this.toolStripStatusLabel_ServerStatus.Text = serverStatus;
                 this.toolStripStatusLabel_LastRefresh.Text = (string)iLOConn.SystemInfo["LastRefresh"];
 
                 if (this.fanListIsFocused && iLOConn.SystemInfo["Fan"]["fans"].Count() > this.fanListSelectedIndex)
