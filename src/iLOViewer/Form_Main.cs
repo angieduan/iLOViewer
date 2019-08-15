@@ -187,6 +187,24 @@ namespace iLOViewer
                 {
                     this.toolStripStatusLabel_ServerStatus.ForeColor = Color.Red;
                 }
+
+                // change menu bar operativity 8/15/2019
+                if(iLOConn.SystemInfo["Overview"]["power"].ToString().Contains("ON"))
+                {
+                    toolStripMenuItem_Action_Power_MomentaryPress.Enabled = true;
+                    pressAndHoldToolStripMenuItem.Enabled = true;
+                    coldbootToolStripMenuItem.Enabled = true;
+                    resetToolStripMenuItem.Enabled = true;
+                }
+                else if(iLOConn.SystemInfo["Overview"]["power"].ToString().Contains("OFF"))
+                {
+                    toolStripMenuItem_Action_Power_MomentaryPress.Enabled = true;
+                    pressAndHoldToolStripMenuItem.Enabled = false;
+                    coldbootToolStripMenuItem.Enabled = false;
+                    resetToolStripMenuItem.Enabled = false;
+                }
+
+
                 this.toolStripStatusLabel_ServerStatus.Text = serverStatus;
                 this.toolStripStatusLabel_LastRefresh.Text = (string)iLOConn.SystemInfo["LastRefresh"];
 
@@ -267,6 +285,30 @@ namespace iLOViewer
             if (this.listBox_iLOList.SelectedIndex >= 0)
             {
                 this.iLOConnList[this.listBox_iLOList.SelectedIndex].PowerMomentaryPress();
+            }
+        }
+
+        private void pressAndHoldToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.listBox_iLOList.SelectedIndex >= 0)
+            {
+                this.iLOConnList[this.listBox_iLOList.SelectedIndex].PressAndHold();
+            }
+        }
+
+        private void coldBootToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(this.listBox_iLOList.SelectedIndex >= 0)
+            {
+                this.iLOConnList[this.listBox_iLOList.SelectedIndex].ColdBoot();
+            }
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(this.listBox_iLOList.SelectedIndex >= 0)
+            {
+                this.iLOConnList[this.listBox_iLOList.SelectedIndex].Reset();
             }
         }
 

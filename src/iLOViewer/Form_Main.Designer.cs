@@ -65,6 +65,9 @@
             this.toolStripMenuItem_NotifyIcon_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon_Main = new System.Windows.Forms.NotifyIcon(this.components);
             this.timer_UpdateServerInfo = new System.Windows.Forms.Timer(this.components);
+            this.pressAndHoldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.coldbootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip_Main.SuspendLayout();
             this.groupBox_Fan.SuspendLayout();
             this.groupBox_Temp.SuspendLayout();
@@ -253,7 +256,10 @@
             // toolStripMenuItem_Action_Power
             // 
             this.toolStripMenuItem_Action_Power.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem_Action_Power_MomentaryPress});
+            this.toolStripMenuItem_Action_Power_MomentaryPress,
+            this.pressAndHoldToolStripMenuItem,
+            this.coldbootToolStripMenuItem,
+            this.resetToolStripMenuItem});
             this.toolStripMenuItem_Action_Power.Name = "toolStripMenuItem_Action_Power";
             this.toolStripMenuItem_Action_Power.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.P)));
             this.toolStripMenuItem_Action_Power.Size = new System.Drawing.Size(214, 22);
@@ -315,27 +321,27 @@
             this.toolStripMenuItem_listBox_iLOList_Edit,
             this.toolStripMenuItem_listBox_iLOList_Delete});
             this.contextMenuStrip_listBox_iLOList.Name = "contextMenuStrip_listBox_iLOList";
-            this.contextMenuStrip_listBox_iLOList.Size = new System.Drawing.Size(114, 70);
+            this.contextMenuStrip_listBox_iLOList.Size = new System.Drawing.Size(108, 70);
             this.contextMenuStrip_listBox_iLOList.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_listBox_iLOList_Opening);
             // 
             // toolStripMenuItem_listBox_iLOList_Add
             // 
             this.toolStripMenuItem_listBox_iLOList_Add.Name = "toolStripMenuItem_listBox_iLOList_Add";
-            this.toolStripMenuItem_listBox_iLOList_Add.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem_listBox_iLOList_Add.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem_listBox_iLOList_Add.Text = "Add";
             this.toolStripMenuItem_listBox_iLOList_Add.Click += new System.EventHandler(this.toolStripMenuItem_listBox_iLOList_Add_Click);
             // 
             // toolStripMenuItem_listBox_iLOList_Edit
             // 
             this.toolStripMenuItem_listBox_iLOList_Edit.Name = "toolStripMenuItem_listBox_iLOList_Edit";
-            this.toolStripMenuItem_listBox_iLOList_Edit.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem_listBox_iLOList_Edit.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem_listBox_iLOList_Edit.Text = "Edit";
             this.toolStripMenuItem_listBox_iLOList_Edit.Click += new System.EventHandler(this.toolStripMenuItem_listBox_iLOList_Edit_Click);
             // 
             // toolStripMenuItem_listBox_iLOList_Delete
             // 
             this.toolStripMenuItem_listBox_iLOList_Delete.Name = "toolStripMenuItem_listBox_iLOList_Delete";
-            this.toolStripMenuItem_listBox_iLOList_Delete.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem_listBox_iLOList_Delete.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem_listBox_iLOList_Delete.Text = "Delete";
             this.toolStripMenuItem_listBox_iLOList_Delete.Click += new System.EventHandler(this.toolStripMenuItem_listBox_iLOList_Delete_Click);
             // 
@@ -344,12 +350,12 @@
             this.contextMenuStrip_NotifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_NotifyIcon_Exit});
             this.contextMenuStrip_NotifyIcon.Name = "contextMenuStrip_Action";
-            this.contextMenuStrip_NotifyIcon.Size = new System.Drawing.Size(97, 26);
+            this.contextMenuStrip_NotifyIcon.Size = new System.Drawing.Size(94, 26);
             // 
             // toolStripMenuItem_NotifyIcon_Exit
             // 
             this.toolStripMenuItem_NotifyIcon_Exit.Name = "toolStripMenuItem_NotifyIcon_Exit";
-            this.toolStripMenuItem_NotifyIcon_Exit.Size = new System.Drawing.Size(96, 22);
+            this.toolStripMenuItem_NotifyIcon_Exit.Size = new System.Drawing.Size(93, 22);
             this.toolStripMenuItem_NotifyIcon_Exit.Text = "Exit";
             this.toolStripMenuItem_NotifyIcon_Exit.Click += new System.EventHandler(this.toolStripMenuItem_NotifyIcon_Exit_Click);
             // 
@@ -365,6 +371,27 @@
             // 
             this.timer_UpdateServerInfo.Interval = 10000;
             this.timer_UpdateServerInfo.Tick += new System.EventHandler(this.timer_UpdateServerInfo_Tick);
+            // 
+            // pressAndHoldToolStripMenuItem
+            // 
+            this.pressAndHoldToolStripMenuItem.Name = "pressAndHoldToolStripMenuItem";
+            this.pressAndHoldToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.pressAndHoldToolStripMenuItem.Text = "&Press and Hold";
+            this.pressAndHoldToolStripMenuItem.Click += new System.EventHandler(this.pressAndHoldToolStripMenuItem_Click);
+            // 
+            // coldbootToolStripMenuItem
+            // 
+            this.coldbootToolStripMenuItem.Name = "coldbootToolStripMenuItem";
+            this.coldbootToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.coldbootToolStripMenuItem.Text = "&Cold boot";
+            this.coldbootToolStripMenuItem.Click += new System.EventHandler(this.coldBootToolStripMenuItem_Click);
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.resetToolStripMenuItem.Text = "&Reset";
+            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
             // Form_Main
             // 
@@ -436,6 +463,9 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_listBox_iLOList_Add;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_listBox_iLOList_Edit;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_listBox_iLOList_Delete;
+        private System.Windows.Forms.ToolStripMenuItem pressAndHoldToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem coldbootToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
     }
 }
 

@@ -131,6 +131,37 @@ namespace iLOViewer
             this.iLOHttpClient.DoJsonRequest("POST", "json/host_power", jBody);
         }
 
+        public void PressAndHold()
+        {
+            JObject jBody = new JObject()
+            {
+                {"method", "hold_power_button"},
+                {"session_key", this.sessionKey }
+            };
+
+            this.iLOHttpClient.DoJsonRequest("POST", "json/host_power", jBody);
+        }
+
+        public void ColdBoot()
+        {
+            JObject jBody = new JObject()
+            {
+                {"method", "system_coldboot"},
+                {"session_key", this.sessionKey }
+            };
+            this.iLOHttpClient.DoJsonRequest("POST", "json/host_power", jBody);
+        }
+
+        public void Reset()
+        {
+            JObject jBody = new JObject()
+            {
+                {"method", "system_reset"},
+                {"session_key", this.sessionKey }
+            };
+            this.iLOHttpClient.DoJsonRequest("POST", "json/host_power", jBody);
+        }
+
         public void OpenDotNetRemoteConsole(string ircPath)
         {
             using (Process process = new Process())
