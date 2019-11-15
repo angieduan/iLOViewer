@@ -166,7 +166,7 @@ namespace iLOViewer
 
         private void ShowPowerState(JObject json)
         {
-            this.toolStripStatusLabel_ServerPower.Text = (string)json["power"];
+            this.toolStripStatusLabel_ServerPower.Text = string.Format("Power {0}", (string)json["power"]);
         }
 
         private void UpdateUIData()
@@ -179,6 +179,7 @@ namespace iLOViewer
                 this.ShowTemp(iLOConn.SystemInfo["Temp"].ToObject<JObject>());
                 this.ShowPowerState(iLOConn.SystemInfo["Overview"].ToObject<JObject>());
                 string serverStatus = ((string)iLOConn.SystemInfo["Overview"]["system_health"]).Replace("OP_STATUS_", "");
+
                 if (serverStatus.ToUpper() == "OK")
                 {
                     this.toolStripStatusLabel_ServerStatus.ForeColor = Color.Green;
@@ -187,16 +188,17 @@ namespace iLOViewer
                 {
                     this.toolStripStatusLabel_ServerStatus.ForeColor = Color.Red;
                 }
+                this.toolStripStatusLabel_ServerStatus.Text = string.Format("Status {0}", serverStatus);
 
                 // change menu bar operativity 8/15/2019
-                if(iLOConn.SystemInfo["Overview"]["power"].ToString().Contains("ON"))
+                if (iLOConn.SystemInfo["Overview"]["power"].ToString().Contains("ON"))
                 {
                     toolStripMenuItem_Action_Power_MomentaryPress.Enabled = true;
                     pressAndHoldToolStripMenuItem.Enabled = true;
                     coldbootToolStripMenuItem.Enabled = true;
                     resetToolStripMenuItem.Enabled = true;
                 }
-                else if(iLOConn.SystemInfo["Overview"]["power"].ToString().Contains("OFF"))
+                else if (iLOConn.SystemInfo["Overview"]["power"].ToString().Contains("OFF"))
                 {
                     toolStripMenuItem_Action_Power_MomentaryPress.Enabled = true;
                     pressAndHoldToolStripMenuItem.Enabled = false;
@@ -204,8 +206,6 @@ namespace iLOViewer
                     resetToolStripMenuItem.Enabled = false;
                 }
 
-
-                this.toolStripStatusLabel_ServerStatus.Text = serverStatus;
                 this.toolStripStatusLabel_LastRefresh.Text = (string)iLOConn.SystemInfo["LastRefresh"];
 
                 if (this.fanListIsFocused && iLOConn.SystemInfo["Fan"]["fans"].Count() > this.fanListSelectedIndex)
@@ -298,7 +298,7 @@ namespace iLOViewer
 
         private void coldBootToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(this.listBox_iLOList.SelectedIndex >= 0)
+            if (this.listBox_iLOList.SelectedIndex >= 0)
             {
                 this.iLOConnList[this.listBox_iLOList.SelectedIndex].ColdBoot();
             }
@@ -306,7 +306,7 @@ namespace iLOViewer
 
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(this.listBox_iLOList.SelectedIndex >= 0)
+            if (this.listBox_iLOList.SelectedIndex >= 0)
             {
                 this.iLOConnList[this.listBox_iLOList.SelectedIndex].Reset();
             }
