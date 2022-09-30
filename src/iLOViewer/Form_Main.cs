@@ -134,7 +134,10 @@ namespace iLOViewer
 
         private void ShowFan(JObject json)
         {
+            this.listView_Fan.BeginUpdate();
+
             this.listView_Fan.Items.Clear();
+
             foreach (var item in json["fans"])
             {
                 string[] data = new string[]{
@@ -145,11 +148,16 @@ namespace iLOViewer
 
                 this.listView_Fan.Items.Add(new ListViewItem(data));
             }
+
+            this.listView_Fan.EndUpdate();
         }
 
         private void ShowTemp(JObject json)
         {
+            this.listView_Temp.BeginUpdate();
+
             this.listView_Temp.Items.Clear();
+
             foreach (var item in json["temperature"])
             {
                 string[] data = new string[]{
@@ -162,11 +170,13 @@ namespace iLOViewer
 
                 this.listView_Temp.Items.Add(new ListViewItem(data));
             }
+
+            this.listView_Temp.EndUpdate();
         }
 
         private void ShowPowerState(JObject json)
         {
-            this.toolStripStatusLabel_ServerPower.Text = string.Format("Power {0}", (string)json["power"]);
+            this.toolStripStatusLabel_ServerPower.Text = string.Format("Power is {0}", (string)json["power"]);
         }
 
         private void UpdateUIData()

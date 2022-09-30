@@ -38,12 +38,12 @@
             this.toolStripStatusLabel_LastRefresh = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_ConnStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox_Fan = new System.Windows.Forms.GroupBox();
-            this.listView_Fan = new System.Windows.Forms.ListView();
+            this.listView_Fan = new Control.ListViewNF();
             this.columnHeader_Fan_Fan = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader_Fan_Status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader_Fan_Speed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox_Temp = new System.Windows.Forms.GroupBox();
-            this.listView_Temp = new System.Windows.Forms.ListView();
+            this.listView_Temp = new Control.ListViewNF();
             this.columnHeader_Temp_Sensor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader_Temp_Status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader_Temp_Temp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -53,6 +53,9 @@
             this.toolStripMenuItem_Action = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Action_Power = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Action_Power_MomentaryPress = new System.Windows.Forms.ToolStripMenuItem();
+            this.pressAndHoldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.coldbootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Action_RemoteConsole = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Action_RemoteConsole_DotNet = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox_iLOList = new System.Windows.Forms.GroupBox();
@@ -65,9 +68,6 @@
             this.toolStripMenuItem_NotifyIcon_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon_Main = new System.Windows.Forms.NotifyIcon(this.components);
             this.timer_UpdateServerInfo = new System.Windows.Forms.Timer(this.components);
-            this.pressAndHoldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.coldbootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip_Main.SuspendLayout();
             this.groupBox_Fan.SuspendLayout();
             this.groupBox_Temp.SuspendLayout();
@@ -112,8 +112,7 @@
             // 
             // toolStripStatusLabel_ServerPower
             // 
-            this.toolStripStatusLabel_ServerPower.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripStatusLabel_ServerPower.ForeColor = System.Drawing.Color.Red;
+            this.toolStripStatusLabel_ServerPower.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel_ServerPower.Name = "toolStripStatusLabel_ServerPower";
             this.toolStripStatusLabel_ServerPower.Size = new System.Drawing.Size(105, 17);
             this.toolStripStatusLabel_ServerPower.Text = "<Server Power>";
@@ -151,6 +150,7 @@
             this.listView_Fan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView_Fan.FullRowSelect = true;
             this.listView_Fan.GridLines = true;
+            this.listView_Fan.HideSelection = false;
             this.listView_Fan.Location = new System.Drawing.Point(3, 19);
             this.listView_Fan.MultiSelect = false;
             this.listView_Fan.Name = "listView_Fan";
@@ -196,6 +196,7 @@
             this.listView_Temp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView_Temp.FullRowSelect = true;
             this.listView_Temp.GridLines = true;
+            this.listView_Temp.HideSelection = false;
             this.listView_Temp.Location = new System.Drawing.Point(3, 19);
             this.listView_Temp.MultiSelect = false;
             this.listView_Temp.Name = "listView_Temp";
@@ -273,6 +274,27 @@
             this.toolStripMenuItem_Action_Power_MomentaryPress.Text = "&Momentary Press";
             this.toolStripMenuItem_Action_Power_MomentaryPress.Click += new System.EventHandler(this.toolStripMenuItem_Action_Power_MomentaryPress_Click);
             // 
+            // pressAndHoldToolStripMenuItem
+            // 
+            this.pressAndHoldToolStripMenuItem.Name = "pressAndHoldToolStripMenuItem";
+            this.pressAndHoldToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.pressAndHoldToolStripMenuItem.Text = "&Press and Hold";
+            this.pressAndHoldToolStripMenuItem.Click += new System.EventHandler(this.pressAndHoldToolStripMenuItem_Click);
+            // 
+            // coldbootToolStripMenuItem
+            // 
+            this.coldbootToolStripMenuItem.Name = "coldbootToolStripMenuItem";
+            this.coldbootToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.coldbootToolStripMenuItem.Text = "&Cold boot";
+            this.coldbootToolStripMenuItem.Click += new System.EventHandler(this.coldBootToolStripMenuItem_Click);
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.resetToolStripMenuItem.Text = "&Reset";
+            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem_Action_RemoteConsole
             // 
             this.toolStripMenuItem_Action_RemoteConsole.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -321,27 +343,27 @@
             this.toolStripMenuItem_listBox_iLOList_Edit,
             this.toolStripMenuItem_listBox_iLOList_Delete});
             this.contextMenuStrip_listBox_iLOList.Name = "contextMenuStrip_listBox_iLOList";
-            this.contextMenuStrip_listBox_iLOList.Size = new System.Drawing.Size(108, 70);
+            this.contextMenuStrip_listBox_iLOList.Size = new System.Drawing.Size(114, 70);
             this.contextMenuStrip_listBox_iLOList.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_listBox_iLOList_Opening);
             // 
             // toolStripMenuItem_listBox_iLOList_Add
             // 
             this.toolStripMenuItem_listBox_iLOList_Add.Name = "toolStripMenuItem_listBox_iLOList_Add";
-            this.toolStripMenuItem_listBox_iLOList_Add.Size = new System.Drawing.Size(107, 22);
+            this.toolStripMenuItem_listBox_iLOList_Add.Size = new System.Drawing.Size(113, 22);
             this.toolStripMenuItem_listBox_iLOList_Add.Text = "Add";
             this.toolStripMenuItem_listBox_iLOList_Add.Click += new System.EventHandler(this.toolStripMenuItem_listBox_iLOList_Add_Click);
             // 
             // toolStripMenuItem_listBox_iLOList_Edit
             // 
             this.toolStripMenuItem_listBox_iLOList_Edit.Name = "toolStripMenuItem_listBox_iLOList_Edit";
-            this.toolStripMenuItem_listBox_iLOList_Edit.Size = new System.Drawing.Size(107, 22);
+            this.toolStripMenuItem_listBox_iLOList_Edit.Size = new System.Drawing.Size(113, 22);
             this.toolStripMenuItem_listBox_iLOList_Edit.Text = "Edit";
             this.toolStripMenuItem_listBox_iLOList_Edit.Click += new System.EventHandler(this.toolStripMenuItem_listBox_iLOList_Edit_Click);
             // 
             // toolStripMenuItem_listBox_iLOList_Delete
             // 
             this.toolStripMenuItem_listBox_iLOList_Delete.Name = "toolStripMenuItem_listBox_iLOList_Delete";
-            this.toolStripMenuItem_listBox_iLOList_Delete.Size = new System.Drawing.Size(107, 22);
+            this.toolStripMenuItem_listBox_iLOList_Delete.Size = new System.Drawing.Size(113, 22);
             this.toolStripMenuItem_listBox_iLOList_Delete.Text = "Delete";
             this.toolStripMenuItem_listBox_iLOList_Delete.Click += new System.EventHandler(this.toolStripMenuItem_listBox_iLOList_Delete_Click);
             // 
@@ -350,12 +372,12 @@
             this.contextMenuStrip_NotifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_NotifyIcon_Exit});
             this.contextMenuStrip_NotifyIcon.Name = "contextMenuStrip_Action";
-            this.contextMenuStrip_NotifyIcon.Size = new System.Drawing.Size(94, 26);
+            this.contextMenuStrip_NotifyIcon.Size = new System.Drawing.Size(97, 26);
             // 
             // toolStripMenuItem_NotifyIcon_Exit
             // 
             this.toolStripMenuItem_NotifyIcon_Exit.Name = "toolStripMenuItem_NotifyIcon_Exit";
-            this.toolStripMenuItem_NotifyIcon_Exit.Size = new System.Drawing.Size(93, 22);
+            this.toolStripMenuItem_NotifyIcon_Exit.Size = new System.Drawing.Size(96, 22);
             this.toolStripMenuItem_NotifyIcon_Exit.Text = "Exit";
             this.toolStripMenuItem_NotifyIcon_Exit.Click += new System.EventHandler(this.toolStripMenuItem_NotifyIcon_Exit_Click);
             // 
@@ -371,27 +393,6 @@
             // 
             this.timer_UpdateServerInfo.Interval = 10000;
             this.timer_UpdateServerInfo.Tick += new System.EventHandler(this.timer_UpdateServerInfo_Tick);
-            // 
-            // pressAndHoldToolStripMenuItem
-            // 
-            this.pressAndHoldToolStripMenuItem.Name = "pressAndHoldToolStripMenuItem";
-            this.pressAndHoldToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
-            this.pressAndHoldToolStripMenuItem.Text = "&Press and Hold";
-            this.pressAndHoldToolStripMenuItem.Click += new System.EventHandler(this.pressAndHoldToolStripMenuItem_Click);
-            // 
-            // coldbootToolStripMenuItem
-            // 
-            this.coldbootToolStripMenuItem.Name = "coldbootToolStripMenuItem";
-            this.coldbootToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
-            this.coldbootToolStripMenuItem.Text = "&Cold boot";
-            this.coldbootToolStripMenuItem.Click += new System.EventHandler(this.coldBootToolStripMenuItem_Click);
-            // 
-            // resetToolStripMenuItem
-            // 
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
-            this.resetToolStripMenuItem.Text = "&Reset";
-            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
             // Form_Main
             // 
@@ -434,13 +435,13 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_ServerPower;
         private System.Windows.Forms.GroupBox groupBox_Fan;
         private System.Windows.Forms.GroupBox groupBox_Temp;
-        private System.Windows.Forms.ListView listView_Temp;
+        private Control.ListViewNF listView_Temp;
         private System.Windows.Forms.ColumnHeader columnHeader_Temp_Sensor;
         private System.Windows.Forms.ColumnHeader columnHeader_Temp_Status;
         private System.Windows.Forms.ColumnHeader columnHeader_Temp_Temp;
         private System.Windows.Forms.ColumnHeader columnHeader_Temp_Caution;
         private System.Windows.Forms.ColumnHeader columnHeader_Temp_Critical;
-        private System.Windows.Forms.ListView listView_Fan;
+        private Control.ListViewNF listView_Fan;
         private System.Windows.Forms.ColumnHeader columnHeader_Fan_Fan;
         private System.Windows.Forms.ColumnHeader columnHeader_Fan_Status;
         private System.Windows.Forms.ColumnHeader columnHeader_Fan_Speed;
